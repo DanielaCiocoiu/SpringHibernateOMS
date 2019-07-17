@@ -1,0 +1,1 @@
+SELECT * FROM oms1.product;
