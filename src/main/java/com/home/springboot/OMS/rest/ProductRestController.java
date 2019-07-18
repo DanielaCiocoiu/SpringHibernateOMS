@@ -9,24 +9,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.home.springboot.OMS.dao.ProductDAO;
 import com.home.springboot.OMS.entity.Product;
+import com.home.springboot.OMS.service.ProductService;
 
 @RestController
 @RequestMapping("/api")
 public class ProductRestController {
 
-	private ProductDAO productDAO;
+	private ProductService productService;
 	
 	//injectez product dao
 	@Autowired
-	public ProductRestController(ProductDAO theProductDAO) {
-		productDAO = theProductDAO;
+	public ProductRestController(ProductService theProductService) {
+		productService = theProductService;
 	}
 	
 	//expun "/products" si returnez lista de produse
 	
 	@GetMapping("/products")
 	public List<Product> findAll(){
-		return productDAO.findAll();
+		return productService.findAll();
 	}
 	
+//	@GetMapping(path = {"/{id}"})
+//	public ResponseEntity<Contact> findById(@PathVariable long id){
+//	  return repository.findById(id)
+//	          .map(record -> ResponseEntity.ok().body(record))
+//	          .orElse(ResponseEntity.notFound().build());
+//	}
 }

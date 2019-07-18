@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 
 import com.home.springboot.OMS.entity.Product;
@@ -25,36 +24,32 @@ public class ProductDAOHibernateImpl implements ProductDAO {
 	}
 
 	@Override
-	@Transactional
+
 	public List<Product> findAll() {
 
 		// sesiunea curenta Hibernate
 		Session currentSession = entityManager.unwrap(Session.class);
 
 		// creez query
-		Query<Product> theQuery = 
-				currentSession.createQuery("from Product", Product.class);
+		Query<Product> theQuery = currentSession.createQuery("from Product", Product.class);
 
 		// execut interogarea si obtin result list
 
-		List<Product> 	Products = theQuery.getResultList();
+		List<Product> products = theQuery.getResultList();
 
-		return Products;
+		return products;
 
 	}
-	
-//	@Override
-//	public Product findById(int theId) {
-//
-//		
-//		Session currentSession = entityManager.unwrap(Session.class);
-//		
-//		//obtin produsele
-//		Product theProduct =
-//				currentSession.get(Product.class, theId);
-//		
-//		return theProduct;
-//	}
 
+	@Override
+	public Product findById(int theId) {
+
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		// obtin produsele
+		Product theProduct = currentSession.get(Product.class, theId);
+
+		return theProduct;
+	}
 
 }
