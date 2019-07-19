@@ -31,7 +31,7 @@ public class ProductRestController {
 	}
 	
 //	@GetMapping(path = {"/{id}"})
-//	public ResponseEntity<Contact> findById(@PathVariable long id){
+//	public ResponseEntity<Product> findById(@PathVariable int id){
 //	  return repository.findById(id)
 //	          .map(record -> ResponseEntity.ok().body(record))
 //	          .orElse(ResponseEntity.notFound().build());

@@ -7,56 +7,53 @@ import javax.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.home.springboot.OMS.entity.Orderp;
-import com.home.springboot.OMS.entity.Product;
-import com.home.springboot.OMS.entity.User;
+import com.home.springboot.OMS.entity.Order;
 
 @Repository
-public class OrderpDAOHibernateImpl implements OrderpDAO {
+public class OrderDAOHibernateImpl implements OrderDAO {
 
 	private EntityManager entityManager;
 
 	@Autowired
-	public OrderpDAOHibernateImpl(EntityManager theEntityManager) {
+	public OrderDAOHibernateImpl(EntityManager theEntityManager) {
 
 		entityManager = theEntityManager;
 	}
 
 	@Override
 	@Transactional
-	public List<Orderp> findAll() {
+	public List<Order> findAll() {
 		// sesiunea curenta Hibernate
 		Session currentSession = entityManager.unwrap(Session.class);
 
 		// creez query
-		Query<Orderp> theQuery = currentSession.createQuery("from Orderp", Orderp.class);
+		Query<Order> theQuery = currentSession.createQuery("from Order", Order.class);
 
 		// execut interogarea si obtin result list
 
-		List<Orderp> Orderps = theQuery.getResultList();
+		List<Order> Orders = theQuery.getResultList();
 
-		return Orderps;
+		return Orders;
 	}
 
 	@Override
-	public Orderp findById(int theId) {
+	public Order findById(int theId) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
 		// obtin produsele
-		Orderp theOrderp = currentSession.get(Orderp.class, theId);
+		Order theOrder = currentSession.get(Order.class, theId);
 
-		return theOrderp;
+		return theOrder;
 	}
 
 	@Override
-	public void save(Orderp theOrderp) {
+	public void save(Order theOrder) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		currentSession.saveOrUpdate(theOrderp);
+		currentSession.saveOrUpdate(theOrder);
 
 	}
 

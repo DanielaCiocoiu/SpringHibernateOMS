@@ -1,1 +1,1 @@
-SELECT * FROM oms1.product;
+SELECT * FROM oms1.user;

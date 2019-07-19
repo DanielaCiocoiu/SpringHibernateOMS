@@ -44,4 +44,10 @@ public class UserDAOHibernateImpl implements UserDAO {
 		currentSession.saveOrUpdate(theUser);
 	}
 
+	@Override
+	public void update(User theUser) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		currentSession.saveOrUpdate(theUser);
+	}
+
 }

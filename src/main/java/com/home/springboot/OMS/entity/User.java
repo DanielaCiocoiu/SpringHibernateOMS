@@ -1,64 +1,97 @@
 package com.home.springboot.OMS.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NaturalId;
+
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "\"user\"")
+public class User implements Serializable{
+
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "username")
-	private String username;
+	@Column(name = "user_name")
+    @NaturalId
+	private String user_name;
+	
+	
 
-	@Column(name = "fullname")
-	private String fullname;
+	@Column(name = "full_name")
+	private String full_name;
 
 	public User() {
 
 	}
 
-	public User(String username, String fullname) {
+	
 
-		this.username = username;
-		this.fullname = fullname;
+	public User(String user_name, String full_name) {
+		super();
+		this.user_name = user_name;
+		this.full_name = full_name;
 	}
+
+
 
 	public int getId() {
 		return id;
 	}
 
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+
+
+	public String getUser_name() {
+		return user_name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 
-	public String getFullname() {
-		return fullname;
+
+
+	public String getFull_name() {
+		return full_name;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+
+
+	public void setFull_name(String full_name) {
+		this.full_name = full_name;
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", fullname=" + fullname + "]";
+		return "User [id=" + id + ", user_name=" + user_name + ", full_name=" + full_name + "]";
 	}
+
+
+
+	
 
 }
