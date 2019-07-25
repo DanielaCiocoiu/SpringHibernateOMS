@@ -7,17 +7,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.home.springboot.OMS.dao.CategoryDAO;
 import com.home.springboot.OMS.dao.ProductDAO;
+import com.home.springboot.OMS.entity.Category;
 import com.home.springboot.OMS.entity.Product;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class CategoryServiceImpl implements CategoryService {
 
-	private ProductDAO productDAO;
+	private CategoryDAO categoryDAO;
 	
 	@Autowired
-	public ProductServiceImpl(ProductDAO theProductDAO) {
-		productDAO = theProductDAO;
+	public CategoryServiceImpl(CategoryDAO theCategoryDAO) {
+		categoryDAO = theCategoryDAO;
 	}
 	
 	
@@ -25,16 +27,16 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	@Transactional
-	public List<Product> findAll() {
-		return productDAO.findAll();
+	public List<Category> findAll() {
+		return categoryDAO.findAll();
 	}
 
 	
 
 	@Override
 	@Transactional
-	public Product findByName(String productName) {
-		return productDAO.findByName(productName);
+	public Category findById(int theId) {
+		return categoryDAO.findById(theId);
 		
 	}
 

@@ -6,48 +6,48 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.home.springboot.OMS.entity.User;
+import com.home.springboot.OMS.entity. Oms_user;
 
 @Repository
-public class UserDAOHibernateImpl implements UserDAO {
+public class  Oms_userDAOHibernateImpl implements  Oms_userDAO {
 
 	private EntityManager entityManager;
 
 	@Autowired
-	public UserDAOHibernateImpl(EntityManager theEntityManager) {
+	public  Oms_userDAOHibernateImpl(EntityManager theEntityManager) {
 
 		entityManager = theEntityManager;
 	}
 
 	@Override
 
-	public List<User> findAll() {
+	public List< Oms_user> findAll() {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		Query<User> theQuery = currentSession.createQuery("from User", User.class);
-		List<User> Users = theQuery.getResultList();
-		return Users;
+		Query< Oms_user> theQuery = currentSession.createQuery("from  Oms_user",  Oms_user.class);
+		List< Oms_user>  Oms_users = theQuery.getResultList();
+		return Oms_users;
 	}
 
 	@Override
-	public User findById(int theId) {
+	public  Oms_user findById(int theId) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		User theUser = currentSession.get(User.class, theId);
+		 Oms_user theOms_user = currentSession.get( Oms_user.class, theId);
 
-		return theUser;
+		return theOms_user;
 	}
 	@Override
-	public void save(User theUser) {
+	public void save( Oms_user theOms_user) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		
-		currentSession.saveOrUpdate(theUser);
+		currentSession.saveOrUpdate(theOms_user);
 	}
 
 	@Override
-	public void update(User theUser) {
+	public void update( Oms_user theOms_user) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		currentSession.saveOrUpdate(theUser);
+		currentSession.saveOrUpdate(theOms_user);
 	}
 
 }

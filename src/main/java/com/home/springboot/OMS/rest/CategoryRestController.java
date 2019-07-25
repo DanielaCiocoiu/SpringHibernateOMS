@@ -9,27 +9,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.home.springboot.OMS.dao.ProductDAO;
+import com.home.springboot.OMS.entity.Category;
 import com.home.springboot.OMS.entity.Oms_user;
 import com.home.springboot.OMS.entity.Product;
+import com.home.springboot.OMS.service.CategoryService;
 import com.home.springboot.OMS.service.ProductService;
 
 @RestController
 @RequestMapping("/api")
-public class ProductRestController {
+public class CategoryRestController {
 
-	private ProductService productService;
+	private CategoryService categoryService;
 	
 	//injectez product dao
 	@Autowired
-	public ProductRestController(ProductService theProductService) {
-		productService = theProductService;
+	public CategoryRestController(CategoryService theCategoryService) {
+		categoryService = theCategoryService;
 	}
 	
 	//expun "/products" si returnez lista de produse
 	
-	@GetMapping("/products")
-	public List<Product> findAll(){
-		return productService.findAll();
+	@GetMapping("/category")
+	public List<Category> findAll(){
+		return categoryService.findAll();
 	}
 	
 	
@@ -43,17 +45,5 @@ public class ProductRestController {
 //	return theProduct;
 //	}
 //	
-	
-	@GetMapping("/product/{productName}")
-	public Product getProduct(@PathVariable String productName) { 
-	//deleg catre user service
-		Product theProduct= productService.findByName(productName);
-	if(theProduct==null) {
-		throw new RuntimeException("Product is not found - " + productName);
-	}
-	return theProduct;
-	}
-	
-	
 
 }
