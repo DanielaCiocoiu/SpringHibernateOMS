@@ -42,12 +42,12 @@ public class ProductDAOHibernateImpl implements ProductDAO {
 	}
 
 	@Override
-	public Product findByName(String productName) {
+	public Product findByName(String productproduct_name) {
 
 		Session currentSession = entityManager.unwrap(Session.class);
 
 		// obtin produsele
-		Product theProduct = currentSession.get(Product.class, productName);
+		Product theProduct = currentSession.get(Product.class, productproduct_name);
 
 		return theProduct;
 	}

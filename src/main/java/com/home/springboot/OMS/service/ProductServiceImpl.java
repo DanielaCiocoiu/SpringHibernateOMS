@@ -33,8 +33,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional
-	public Product findByName(String productName) {
-		return productDAO.findByName(productName);
+	public Product findByName(String productproduct_name) {
+		return productDAO.findByName(productproduct_name);
 		
 	}
 

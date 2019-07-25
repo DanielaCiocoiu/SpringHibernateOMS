@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.home.springboot.OMS.dao.ProductDAO;
@@ -44,16 +46,16 @@ public class ProductRestController {
 //	}
 //	
 	
-	@GetMapping("/product/{productName}")
-	public Product getProduct(@PathVariable String productName) { 
+	@GetMapping("/product/{productproduct_name}")
+	public Product getProduct(@PathVariable String productproduct_name) { 
 	//deleg catre user service
-		Product theProduct= productService.findByName(productName);
+		Product theProduct= productService.findByName(productproduct_name);
 	if(theProduct==null) {
-		throw new RuntimeException("Product is not found - " + productName);
+		throw new RuntimeException("Product is not found - " + productproduct_name);
 	}
 	return theProduct;
 	}
 	
-	
+
 
 }
