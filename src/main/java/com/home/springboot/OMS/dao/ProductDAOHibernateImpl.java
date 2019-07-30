@@ -9,7 +9,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import com.home.springboot.OMS.entity.Product;
 
 @Repository
@@ -42,16 +41,25 @@ public class ProductDAOHibernateImpl implements ProductDAO {
 	}
 
 	@Override
-	public Product findByName(String productproduct_name) {
+	public Product findByName(String theproduct_name) {
 
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// obtin produsele
-		Product theProduct = currentSession.get(Product.class, productproduct_name);
+		
+		Product theProduct = currentSession.get(Product.class, theproduct_name);
 
 		return theProduct;
 	}
 
-	
+	@Override
+	public Product findById(int theId) {
+
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		// obtin produsele
+		Product theProduct = currentSession.get(Product.class, theId);
+
+		return theProduct;
+	}
 
 }

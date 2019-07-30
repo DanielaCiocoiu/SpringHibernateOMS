@@ -3,7 +3,6 @@ package com.home.springboot.OMS.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +20,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	
-	//@Qualifier("productDAOJpaImpl")
-	
 	@Override
 	@Transactional
 	public List<Product> findAll() {
@@ -30,12 +27,16 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	
-
 	@Override
 	@Transactional
-	public Product findByName(String productproduct_name) {
-		return productDAO.findByName(productproduct_name);
+	public Product findByName(String theproduct_name) {
+		return productDAO.findByName(theproduct_name);
 		
+	}
+	@Override
+	@Transactional
+		public Product findById(int theId) {
+		return productDAO.findById(theId);
 	}
 
 }

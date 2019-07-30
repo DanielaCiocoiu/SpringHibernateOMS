@@ -11,23 +11,23 @@ CREATE TABLE `oms_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `USER_NAME_UNIQUE` (`user_name`),
   KEY `username` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
  
 
- DROP TABLE IF EXISTS `product`;
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `product_code` int(11) DEFAULT NULL,
   `product_name` varchar(50) DEFAULT NULL,
   `description` varchar(50) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`product_id`),
   UNIQUE KEY `PRODUCT_CODE` (`product_code`),
   UNIQUE KEY `QUANTITY` (`quantity`),
   KEY `FK_CATEGORY_idx` (`category_id`),
   CONSTRAINT `FK_CATEGORY` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 DROP TABLE IF EXISTS `category`;
@@ -35,7 +35,7 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Cat` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `oms_order`;
 CREATE TABLE `oms_order` (
@@ -45,7 +45,7 @@ CREATE TABLE `oms_order` (
   PRIMARY KEY (`order_id`),
   KEY `FK_USER_NAME_idx` (`user_name`),
   CONSTRAINT `FK_USER_NAME` FOREIGN KEY (`user_name`) REFERENCES `oms_user` (`user_name`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `order_product`;
 CREATE TABLE `order_product` (
@@ -60,14 +60,28 @@ CREATE TABLE `order_product` (
   CONSTRAINT `FK_ORDER_idx` FOREIGN KEY (`orderid`) REFERENCES `oms_order` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PRODUCT_CODE` FOREIGN KEY (`product_code`) REFERENCES `product` (`product_code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_QUANTITY` FOREIGN KEY (`quantity`) REFERENCES `product` (`quantity`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
-INSERT INTO `oms_order` (`order_id`,`creation_time`,`user_name`) VALUES (1,'2019-03-13','Mia');
-INSERT INTO `oms_order` (`order_id`,`creation_time`,`user_name`) VALUES (2,'2019-03-14','Nico');
-INSERT INTO `oms_order` (`order_id`,`creation_time`,`user_name`) VALUES (3,'2019-03-15','Mario');
-INSERT INTO `oms_order` (`order_id`,`creation_time`,`user_name`) VALUES (4,'2019-03-16','Vio');
-INSERT INTO `oms_order` (`order_id`,`creation_time`,`user_name`) VALUES (5,'2019-01-12','Petro');
-INSERT INTO `oms_order` (`order_id`,`creation_time`,`user_name`) VALUES (6,'2019-09-29','Vio');
+
+DROP TABLE IF EXISTS `order_product_many`;
+CREATE TABLE `order_product_many` (
+   `product_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+   PRIMARY KEY (`product_id`,`order_id`),
+   KEY `FK_ORDER_idx` (`order_id`),
+  CONSTRAINT `FK_PRODUCT_05` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ORDER_id` FOREIGN KEY (`order_id`) REFERENCES `oms_order` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+
+
+
+INSERT INTO `oms_order`  VALUES (1,'2019-03-13','Mia');
+INSERT INTO `oms_order`  VALUES (2,'2019-03-14','Nico');
+INSERT INTO `oms_order`  VALUES (3,'2019-03-15','Mario');
+INSERT INTO `oms_order`  VALUES (4,'2019-03-16','Vio');
+INSERT INTO `oms_order`  VALUES (5,'2019-01-12','Petro');
+INSERT INTO `oms_order`  VALUES (6,'2019-09-29','Vio');
 
 INSERT INTO `category` (`id`,`Cat`) VALUES (1,'Vehicle');
 INSERT INTO `category` (`id`,`Cat`) VALUES (2,'TV');
@@ -84,9 +98,19 @@ INSERT INTO `order_product` (`id`,`orderid`,`product_code`,`quantity`) VALUES (1
 INSERT INTO `order_product` (`id`,`orderid`,`product_code`,`quantity`) VALUES (2,2,333,5);
 INSERT INTO `order_product` (`id`,`orderid`,`product_code`,`quantity`) VALUES (3,3,444,2);
 
-INSERT INTO `product` (`id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (1,222,'Laptop','Acer',1,3);
-INSERT INTO `product` (`id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (2,333,'TV','Samsung',5,2);
-INSERT INTO `product` (`id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (3,444,'Audi','A6',2,1);
+INSERT INTO `product` (`product_id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (1,222,'Laptop','Acer',1,3);
+INSERT INTO `product` (`product_id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (2,333,'TV','Samsung',5,2);
+INSERT INTO `product` (`product_id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (3,444,'Audi','A6',2,1);
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('4', '555', 'BMW', 'Seria 5', '6', '1');
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('5', '666', 'TV', 'LG', '4', '2');
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('6', '777', 'Laptop', 'Lenovo', '3', '3');
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('7', '888', 'Opel', 'Vectra', '7', '1');
+
+
+INSERT INTO `order_productMany`  VALUES (1, 3);
+INSERT INTO `order_productMany`  VALUES (1, 5);
+INSERT INTO `order_productMany`  VALUES (1, 1);
+INSERT INTO `order_productMany`  VALUES (1, 4);
 
 	SET FOREIGN_KEY_CHECKS = 1;
 	

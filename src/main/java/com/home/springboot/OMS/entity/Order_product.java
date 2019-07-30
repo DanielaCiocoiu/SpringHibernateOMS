@@ -77,9 +77,13 @@ public Order_product () {
 
 	@Override
 	public String toString() {
-		return "Order_Product [id=" + id + ", oms_order=" + oms_order + ", product=" + product + ", product1="
+		return "Order_product [id=" + id + ", oms_order=" + oms_order + ", product=" + product + ", product1="
 				+ product1 + "]";
 	}
+
+	
+
+	
 	
 	
 
