@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -44,8 +45,9 @@ public class Oms_order implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
-	@JoinTable(name = "order_product_many", joinColumns = @JoinColumn(name = "order_id"), 
+	@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id"), 
 	inverseJoinColumns = @JoinColumn(name = "product_id"))
+	@JsonBackReference
 	private List<Product> products = new ArrayList<Product>(0);
 
 	public Oms_order() {

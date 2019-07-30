@@ -17,35 +17,43 @@ import com.home.springboot.OMS.service.ProductService;
 public class ProductRestController {
 
 	private ProductService productService;
-	
+
 	@Autowired
 	public ProductRestController(ProductService theProductService) {
 		productService = theProductService;
 	}
-	
+
 	@GetMapping("/products")
 
-	public List<Product> findAll(){
+	public List<Product> findAll() {
 		return productService.findAll();
 	}
-	
+
+	@GetMapping("/product/{productId}")
+	public Product getProduct(@PathVariable int productId) {
+		Product theProduct = productService.findById(productId);
+		if (theProduct == null) {
+			throw new RuntimeException("Product is not found - " + productId);
+		}
+		return theProduct;
+	}
+
 	@GetMapping("/products/{productId}")
-	public Product getProduct(
-			@PathVariable int productId,
-			@RequestParam(value="product_name", required=true) String product_name, 
-			@RequestParam (value="category_id", required=true) String category_id,
-			@RequestParam (value="description", required=true) String description) { 
-		
-	//deleg catre user service
-		Product theProduct= productService.findById(productId);
-	if(theProduct==null) {
-		throw new RuntimeException("Product is not found - " + productId);
+	public Product getProduct(@PathVariable int productId,
+			@RequestParam(value = "product_name", required = true) String product_name,
+			@RequestParam(value = "category_id", required = true) String category_id,
+			@RequestParam(value = "description", required = true) String description) {
+
+		// deleg catre user service
+		Product theProduct = productService.findById(productId);
+		if (theProduct == null) {
+			throw new RuntimeException("Product is not found - " + productId);
+		}
+		return theProduct;
 	}
-	return theProduct;
-	}
-	
-	//http://localhost:8080/api/products/2?product_name=Samsung&category_id=2
-	
+
+	// http://localhost:8080/api/products/2?product_name=TV&category_id=2
+
 //	@GetMapping("/product/{theproduct_name}")
 //	public Product getProduct(@PathVariable String theproduct_name) { 
 //
@@ -55,7 +63,7 @@ public class ProductRestController {
 //	}
 //	return theProduct;
 //	}
-	
+
 //	@GetMapping("/productNames/{productId}")
 //	@ResponseBody
 //	public String getProductName (
@@ -66,10 +74,5 @@ public class ProductRestController {
 //		
 //		return "product_name: " + product_name + " " + "category_id: " + category_id;
 //	}
-	
-	
-	//http://localhost:8080/foos?id=abc
-	//http://localhost:8080/api/products?product_name=Laptop
-		
 
 }
