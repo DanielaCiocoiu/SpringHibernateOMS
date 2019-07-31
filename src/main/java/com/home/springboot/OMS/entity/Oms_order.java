@@ -19,12 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name = "oms_order")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Oms_order{
 
 	
@@ -47,7 +43,6 @@ public class Oms_order{
 	@JoinTable(name = "order_product", 
 	joinColumns = @JoinColumn(name = "order_id"), 
 	inverseJoinColumns = @JoinColumn(name = "product_id"))
-	@JsonBackReference
 	private List<Product> products = new ArrayList<Product>(0);
 
 	public Oms_order() {
