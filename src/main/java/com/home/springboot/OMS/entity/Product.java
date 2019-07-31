@@ -15,18 +15,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "product")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@product_id")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product implements Serializable {
 
 	
@@ -62,7 +62,7 @@ public class Product implements Serializable {
 	@JoinTable(name = "order_product", 
 	joinColumns = @JoinColumn(name = "product_id"), 
 	inverseJoinColumns = @JoinColumn(name = "order_id"))
-	@JsonBackReference
+	//@JsonManagedReference
 	private List<Oms_order> oms_orders = new ArrayList<Oms_order>(0);
 
 
@@ -70,25 +70,25 @@ public class Product implements Serializable {
 		
 	}
 
-	public Product(int product_code, String product_name, String description, int quantity, Category category) {
+//	public Product(int product_code, String product_name, String description, int quantity, Category category) {
+//
+//		this.product_code = product_code;
+//		this.product_name = product_name;
+//		this.description = description;
+//		this.quantity = quantity;
+//		this.category = category;
+//	}
 
-		this.product_code = product_code;
-		this.product_name = product_name;
-		this.description = description;
-		this.quantity = quantity;
-		this.category = category;
-	}
-
-	public Product(List<Oms_order> oms_orders, int product_code, String product_name, String description, int quantity,
-			Category category) {
-
-		this.oms_orders = oms_orders;
-		this.product_code = product_code;
-		this.product_name = product_name;
-		this.description = description;
-		this.quantity = quantity;
-		this.category = category;
-	}
+//	public Product(List<Oms_order> oms_orders, int product_code, String product_name, String description, int quantity,
+//			Category category) {
+//
+//		this.oms_orders = oms_orders;
+//		this.product_code = product_code;
+//		this.product_name = product_name;
+//		this.description = description;
+//		this.quantity = quantity;
+//		this.category = category;
+//	}
 
 	public int getProduct_id() {
 		return product_id;
@@ -157,9 +157,10 @@ public class Product implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [product_id=" + product_id + ", oms_orders=" + oms_orders + ", product_code=" + product_code
-				+ ", product_name=" + product_name + ", description=" + description + ", quantity=" + quantity
-				+ ", category=" + category + "]";
+		return "Product [product_id=" + product_id + ", product_code=" + product_code + ", product_name=" + product_name
+				+ ", description=" + description + ", quantity=" + quantity + ", category=" + category + "]";
 	}
+
+	
 
 }

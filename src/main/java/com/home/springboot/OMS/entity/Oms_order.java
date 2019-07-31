@@ -1,6 +1,5 @@
 package com.home.springboot.OMS.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,9 +25,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "oms_order")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Oms_order implements Serializable {
+public class Oms_order{
 
-	private static final long serialVersionUID = 1L;
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +44,8 @@ public class Oms_order implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
-	@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id"), 
+	@JoinTable(name = "order_product", 
+	joinColumns = @JoinColumn(name = "order_id"), 
 	inverseJoinColumns = @JoinColumn(name = "product_id"))
 	@JsonBackReference
 	private List<Product> products = new ArrayList<Product>(0);
