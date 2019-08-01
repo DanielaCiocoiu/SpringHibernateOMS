@@ -39,7 +39,7 @@ public class Oms_orderServiceImpl implements Oms_orderService {
 	}
 
 	@Override
-	public Oms_order findByUserName(String user_name) {
+	public List<Oms_order> findByUserName(String user_name) {
 		return oms_orderDAO.findByUserName(user_name);
 
 	}

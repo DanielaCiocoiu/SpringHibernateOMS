@@ -46,17 +46,14 @@ public class Oms_orderRestController {
 
 	// Retrieve Order GET …/{user_name}/orders/{id}
 	// localhost:8080/api/Petro/oms_orders/5
-	@GetMapping("/{user_name}/oms_orders/{oms_order_id}")
-	public Oms_order getOms_order(
+	@GetMapping("/{user_name}/oms_orders")
+	public List<Oms_order> getOms_order(
 
-			@PathVariable int oms_order_id, @PathVariable String user_name) {
+		@PathVariable String user_name) {
 
-		Oms_order theOms_userOrder = oms_orderService.findByUserName(user_name);
+		List<Oms_order> theOms_userOrder = oms_orderService.findByUserName(user_name);
 
-		if (theOms_userOrder == null) {
-			throw new RuntimeException("Oms_order id not found - " + user_name);
-		}
-
+		
 		return theOms_userOrder;
 	}
 
@@ -75,7 +72,7 @@ public class Oms_orderRestController {
 	@PostMapping("/{user_name}/oms_orders")
 	public Oms_order addOms_order(
 
-			@RequestBody Oms_order theOms_orderUser, @PathVariable String user_name) {
+		@RequestBody Oms_order theOms_orderUser, @PathVariable String user_name) {
 
 		theOms_orderUser.setOrder_id(0);
 
