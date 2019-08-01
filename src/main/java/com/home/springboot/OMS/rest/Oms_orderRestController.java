@@ -45,10 +45,10 @@ public class Oms_orderRestController {
 		return theOms_order;
 	}
 	
-	// Retrieve Order GET …/{username}/orders/{id}
+	// Retrieve Order GET …/{user_name}/orders/{id}
 	// http://localhost:8080/api/oms_orders/5?Petro
-	@GetMapping("/{username}/oms_orders/{oms_order_id}")
-	public Oms_order getOms_order(@RequestParam(value = "username", required = true) String username,
+	@GetMapping("/{user_name}/oms_orders/{oms_order_id}")
+	public Oms_order getOms_order(@RequestParam(value = "user_name", required = true) String user_name,
 
 			@PathVariable int oms_order_id) {
 
@@ -73,12 +73,12 @@ public class Oms_orderRestController {
 	}
 	
 
-//  Create Order  POST …/{username}/orders
-	@PostMapping("/{username}/oms_orders")
+//  Create Order  POST …/{user_name}/orders
+	@PostMapping("/{user_name}/oms_orders")
 	public Oms_order addOms_order(
 			
 			@RequestBody Oms_order theOms_orderUser,
-			@RequestParam(value = "username", required = true) String username,
+			@RequestParam(value = "user_name", required = true) String user_name,
 			@PathVariable int oms_order_id) {
 
 		theOms_orderUser.setOrder_id(0);
@@ -100,11 +100,11 @@ public class Oms_orderRestController {
 	}
 	
 	
-//	Update Order  PUT …/{username}/orders/{id}
-	@PutMapping("/{username}/oms_order_id")
+//	Update Order  PUT …/{user_name}/orders/{id}
+	@PutMapping("/{user_name}/oms_order_id")
 	public Oms_order updateOms_order(
 			@RequestBody Oms_order theOms_orderPutUser,
-			@RequestParam(value = "username", required = true) String username,
+			@RequestParam(value = "user_name", required = true) String user_name,
 			@PathVariable int oms_order_id) {
 
 		if(theOms_orderPutUser.getOrder_id() == 0){
