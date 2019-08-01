@@ -20,13 +20,11 @@ public class Oms_userRestController {
 
 	private Oms_userService oms_userService;
 	
-	//injectez user dao
+	
 	@Autowired
 	public Oms_userRestController(Oms_userService theOms_userService) {
 		oms_userService = theOms_userService;
 	}
-	
-	//expun "/users" si returnez lista de useri
 	
 	@GetMapping("/oms_users")
 	public List<Oms_user> findAll(){
@@ -47,8 +45,6 @@ public class Oms_userRestController {
 	@PostMapping("/oms_users")
 	public Oms_user saveOms_user(@RequestBody Oms_user theOms_user) {
 		
-		// daca trimit un id in JSON il setez la 0
-		// fortez salvarea unui nou item in loc sa fac update
 		
 		theOms_user.setId(0);
 		

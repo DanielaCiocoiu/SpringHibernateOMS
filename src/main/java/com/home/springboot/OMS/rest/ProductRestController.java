@@ -14,6 +14,7 @@ import com.home.springboot.OMS.service.ProductService;
 
 @RestController
 @RequestMapping("/api")
+
 public class ProductRestController {
 
 	private ProductService productService;
@@ -29,7 +30,7 @@ public class ProductRestController {
 		return productService.findAll();
 	}
 
-	@GetMapping("/product/{productId}")
+	@GetMapping("/products/{productId}")
 	public Product getProduct(@PathVariable int productId) {
 		Product theProduct = productService.findById(productId);
 		if (theProduct == null) {
@@ -38,7 +39,7 @@ public class ProductRestController {
 		return theProduct;
 	}
 
-	@GetMapping("/products/{productId}")
+	@GetMapping("/product/{productId}")
 	public Product getProduct(@PathVariable int productId,
 			@RequestParam(value = "product_name", required = true) String product_name,
 			@RequestParam(value = "category_id", required = true) String category_id,
@@ -54,12 +55,12 @@ public class ProductRestController {
 
 	// http://localhost:8080/api/products/2?product_name=TV&category_id=2
 
-//	@GetMapping("/product/{theproduct_name}")
-//	public Product getProduct(@PathVariable String theproduct_name) { 
+//	@GetMapping("/products/{product_name}")
+//	public Product getProduct(@PathVariable String product_name) { 
 //
-//		Product theProduct= productService.findByName(theproduct_name);
+//		Product theProduct= productService.findByName(product_name);
 //	if(theProduct==null) {
-//		throw new RuntimeException("Product is not found - " + theproduct_name);
+//		throw new RuntimeException("Product Name is not found - " + product_name);
 //	}
 //	return theProduct;
 //	}

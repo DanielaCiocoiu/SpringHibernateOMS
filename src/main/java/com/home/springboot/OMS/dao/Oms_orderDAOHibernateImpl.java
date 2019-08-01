@@ -43,7 +43,6 @@ public class Oms_orderDAOHibernateImpl implements Oms_orderDAO {
 	public Oms_order findById(int theId) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// obtin produsele
 		Oms_order theOrder = currentSession.get(Oms_order.class, theId);
 
 		return theOrder;
