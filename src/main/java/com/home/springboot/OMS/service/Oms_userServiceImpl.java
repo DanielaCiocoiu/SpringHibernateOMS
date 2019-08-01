@@ -22,15 +22,11 @@ public class Oms_userServiceImpl implements Oms_userService {
 		oms_userDAO = theOms_userDAO;
 	}
 	
-	//@Qualifier("oms_userDAOJpaImpl")
-	
 	@Override
 	@Transactional
 	public List<Oms_user> findAll() {
 		return oms_userDAO.findAll();
 	}
-
-	
 
 	@Override
 	@Transactional
@@ -38,8 +34,6 @@ public class Oms_userServiceImpl implements Oms_userService {
 		return oms_userDAO.findById(theId);
 		
 	}
-
-
 	@Override
 	public void save(Oms_user theOms_user) {
 		oms_userDAO.save(theOms_user);
@@ -51,5 +45,7 @@ public class Oms_userServiceImpl implements Oms_userService {
 		oms_userDAO.update(theOms_user);
 		
 	}
+
+
 
 }

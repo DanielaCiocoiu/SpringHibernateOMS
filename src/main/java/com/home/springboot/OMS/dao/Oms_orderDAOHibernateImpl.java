@@ -26,13 +26,10 @@ public class Oms_orderDAOHibernateImpl implements Oms_orderDAO {
 	@Override
 	@Transactional
 	public List<Oms_order> findAll() {
-		// sesiunea curenta Hibernate
+
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// creez query
 		Query<Oms_order> theQuery = currentSession.createQuery("from Oms_order", Oms_order.class);
-
-		// execut interogarea si obtin result list
 
 		List<Oms_order> Orders = theQuery.getResultList();
 
@@ -54,6 +51,15 @@ public class Oms_orderDAOHibernateImpl implements Oms_orderDAO {
 
 		currentSession.saveOrUpdate(theOrder);
 
+	}
+
+	@Override
+	public Oms_order findByUserName(String user_name) {
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		Oms_order theOms_userOrder = currentSession.get(Oms_order.class, user_name);
+
+		return theOms_userOrder;
 	}
 
 }

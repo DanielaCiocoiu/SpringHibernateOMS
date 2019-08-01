@@ -24,7 +24,6 @@ import javax.persistence.TemporalType;
 public class Oms_order{
 
 	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")

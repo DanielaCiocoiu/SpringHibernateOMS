@@ -10,4 +10,5 @@ public interface Oms_userService {
 	public Oms_user findById(int theId);
 	public void save(Oms_user theOms_user); 
 	public void update(Oms_user theOms_user); 
+	
 }

@@ -39,6 +39,8 @@ public class ProductRestController {
 		return theProduct;
 	}
 
+	
+	//localhost:8080/api/products/2?product_name=TV&category_id=2
 	@GetMapping("/product/{productId}")
 	public Product getProduct(@PathVariable int productId,
 			@RequestParam(value = "product_name", required = true) String product_name,
@@ -53,8 +55,7 @@ public class ProductRestController {
 		return theProduct;
 	}
 
-	// http://localhost:8080/api/products/2?product_name=TV&category_id=2
-
+	
 //	@GetMapping("/products/{product_name}")
 //	public Product getProduct(@PathVariable String product_name) { 
 //
