@@ -54,12 +54,12 @@ public class Oms_orderDAOHibernateImpl implements Oms_orderDAO {
 	}
 
 	@Override
-	public Oms_order findByUserName(String user_name) {
+	public List<Oms_order> findByUserName(String user_name) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		currentSession.createQuery("from Oms_order o where o.oms_user.user_name='" + user_name + "'", Oms_order.class).getResultList();
+		List<Oms_order> Orders = currentSession.createQuery("from Oms_order o where o.oms_user.user_name='" + user_name + "'", Oms_order.class).getResultList();
 
-		return null;
+		return Orders;
 	}
 
 }
