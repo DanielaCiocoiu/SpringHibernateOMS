@@ -57,7 +57,7 @@ public class Oms_orderDAOHibernateImpl implements Oms_orderDAO {
 	public Oms_order findByUserName(String user_name) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		Oms_order theOms_userOrder = currentSession.createQuery("from Oms_order", o where o.Oms_user.user_name="""+ user_name+ """, Oms_order.class).GETresultlist ;
+		Oms_order theOms_userOrder = currentSession.createQuery(from Oms_order o where o.oms_user.user_name="+ user_name+ ", Oms_order.class).GETresultlist ;
 
 		return theOms_userOrder;
 	}
