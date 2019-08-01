@@ -30,7 +30,7 @@ public class ProductRestController {
 		return productService.findAll();
 	}
 
-	@GetMapping("/products/{productId}")
+	@GetMapping("/products/{productId}") //dupa product name
 	public Product getProduct(@PathVariable int productId) {
 		Product theProduct = productService.findById(productId);
 		if (theProduct == null) {
@@ -40,14 +40,14 @@ public class ProductRestController {
 	}
 
 	
-	//localhost:8080/api/products/2?product_name=TV&category_id=2
-	@GetMapping("/product/{productId}")
-	public Product getProduct(@PathVariable int productId,
-			@RequestParam(value = "product_name", required = true) String product_name,
-			@RequestParam(value = "category_id", required = true) String category_id,
-			@RequestParam(value = "description", required = true) String description) {
+	//localhost:8080/api/products?cat=TV
+	@GetMapping("/products/cat=TV")//caut 
+	public Product getProduct(
+			
+			@RequestParam(value = "cat", required = true) String cat
+			 {
 
-		// deleg catre user service
+		
 		Product theProduct = productService.findById(productId);
 		if (theProduct == null) {
 			throw new RuntimeException("Product is not found - " + productId);

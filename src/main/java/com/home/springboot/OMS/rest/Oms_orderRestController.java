@@ -58,38 +58,38 @@ public class Oms_orderRestController {
 	}
 
 	
-	@PostMapping("/oms_orders")
-	public Oms_order addOms_order(@RequestBody Oms_order theOms_order) {
-
-		theOms_order.setOrder_id(0); // setId(0);
-
-		oms_orderService.save(theOms_order);
-
-		return theOms_order;
-	}
+//	@PostMapping("/oms_orders")
+//	public Oms_order addOms_order(@RequestBody Oms_order theOms_order) {
+//
+//		theOms_order.setOrder_id(0); // setId(0);
+//
+//		oms_orderService.save(theOms_order);
+//
+//		return theOms_order;
+//	}
 
 //  Create Order  POST …/{user_name}/orders
 	@PostMapping("/{user_name}/oms_orders")
 	public Oms_order addOms_order(
 
-		@RequestBody Oms_order theOms_orderUser, @PathVariable String user_name) {
+		@RequestBody Oms_order theOms_orderUser, @PathVariable String user_name) { //de injectat user service, look up dupa user name si de salvat in order
 
 		theOms_orderUser.setOrder_id(0);
 
 		oms_orderService.save(theOms_orderUser);
-
+//user service find
 		return theOms_orderUser;
 	}
 
-	@PutMapping("/oms_orders")
-	public Oms_order updateOms_order(@RequestBody Oms_order theOms_order) {
-		if (theOms_order.getOrder_id() == 0) {
-			throw new RuntimeException("order_id is 0 or not present in the request");
-		}
-		oms_orderService.save(theOms_order);
-
-		return theOms_order;
-	}
+//	@PutMapping("/oms_orders")
+//	public Oms_order updateOms_order(@RequestBody Oms_order theOms_order) {
+//		if (theOms_order.getOrder_id() == 0) {
+//			throw new RuntimeException("order_id is 0 or not present in the request");
+//		}
+//		oms_orderService.save(theOms_order);
+//
+//		return theOms_order;
+//	}
 
 	// Update Order PUT …/{user_name}/orders/{id}
 	@PutMapping("/{user_name}/oms_order_id")
