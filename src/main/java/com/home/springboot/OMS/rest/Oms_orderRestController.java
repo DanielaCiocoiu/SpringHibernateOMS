@@ -23,9 +23,6 @@ public class Oms_orderRestController {
 
 	private Oms_orderService oms_orderService;
 
-//		Update Order
-//		PUT …/{username}/orders/{id}
-
 	@Autowired
 	public Oms_orderRestController(Oms_orderService theOms_orderService) {
 		oms_orderService = theOms_orderService;
@@ -36,8 +33,20 @@ public class Oms_orderRestController {
 		return oms_orderService.findAll();
 	}
 
-//	Retrieve Order
-//	GET …/{username}/orders/{id}
+	@GetMapping("/oms_orders/{oms_order_id}")
+	public Oms_order getOms_order(@PathVariable int oms_order_id) {
+
+		Oms_order theOms_order = oms_orderService.findById(oms_order_id);
+
+		if (theOms_order == null) {
+			throw new RuntimeException("Oms_order id not found - " + oms_order_id);
+		}
+
+		return theOms_order;
+	}
+	
+	// Retrieve Order GET …/{username}/orders/{id}
+	// http://localhost:8080/api/oms_orders/5?Petro
 	@GetMapping("/{username}/oms_orders/{oms_order_id}")
 	public Oms_order getOms_order(@RequestParam(value = "username", required = true) String username,
 
@@ -51,21 +60,8 @@ public class Oms_orderRestController {
 
 		return theOms_order;
 	}
-	// http://localhost:8080/api/oms_orders/5?Petro
+	
 
-	@GetMapping("/oms_orders/{oms_order_id}")
-	public Oms_order getOms_order(@PathVariable int oms_order_id) {
-
-		Oms_order theOms_order = oms_orderService.findById(oms_order_id);
-
-		if (theOms_order == null) {
-			throw new RuntimeException("Oms_order id not found - " + oms_order_id);
-		}
-
-		return theOms_order;
-	}
-
-	// aduc new order
 	@PostMapping("/oms_orders")
 	public Oms_order addOms_order(@RequestBody Oms_order theOms_order) {
 
@@ -75,22 +71,23 @@ public class Oms_orderRestController {
 
 		return theOms_order;
 	}
+	
 
-//    Create Order
-//	POST …/{username}/orders
+//  Create Order  POST …/{username}/orders
 	@PostMapping("/{username}/oms_orders")
-	public Oms_order addOms_order(@RequestBody Oms_order theOms_orderUser,
+	public Oms_order addOms_order(
+			
+			@RequestBody Oms_order theOms_orderUser,
 			@RequestParam(value = "username", required = true) String username,
+			@PathVariable int oms_order_id) {
 
-			@PathVariable int oms_orderId) {
-
-		theOms_orderUser.setOrder_id(0); // setId(0);
+		theOms_orderUser.setOrder_id(0);
 
 		oms_orderService.save(theOms_orderUser);
 
 		return theOms_orderUser;
 	}
-	// http://localhost:8080/api/oms_orders?Petro
+	
 
 	@PutMapping("/oms_orders")
 	public Oms_order updateOms_order(@RequestBody Oms_order theOms_order) {
@@ -101,5 +98,21 @@ public class Oms_orderRestController {
 
 		return theOms_order;
 	}
+	
+	
+//	Update Order  PUT …/{username}/orders/{id}
+	@PutMapping("/{username}/oms_order_id")
+	public Oms_order updateOms_order(
+			@RequestBody Oms_order theOms_orderPutUser,
+			@RequestParam(value = "username", required = true) String username,
+			@PathVariable int oms_order_id) {
 
+		if(theOms_orderPutUser.getOrder_id() == 0){
+			throw new RuntimeException("order_id is 0 or not present in the request");
+		}
+		oms_orderService.save(theOms_orderPutUser);
+
+		return theOms_orderPutUser;
+	}
+	
 }
