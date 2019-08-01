@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -33,7 +34,7 @@ public class Oms_order{
 	@Temporal(TemporalType.DATE)
 	private Date creation_time;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_name", referencedColumnName = "user_name")
 	private Oms_user oms_user;
 
