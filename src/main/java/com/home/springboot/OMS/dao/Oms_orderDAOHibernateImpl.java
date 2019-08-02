@@ -27,7 +27,7 @@ public class Oms_orderDAOHibernateImpl implements Oms_orderDAO {
 	@Transactional
 	public List<Oms_order> findAll() {
 
-		Session currentSession = entityManager.unwrap(Session.class);
+		Session currentSession = entityManager.unwrap(Session.class); 
 
 		Query<Oms_order> theQuery = currentSession.createQuery("from Oms_order", Oms_order.class);
 
@@ -52,14 +52,28 @@ public class Oms_orderDAOHibernateImpl implements Oms_orderDAO {
 		currentSession.saveOrUpdate(theOrder);
 
 	}
-
+	
+	// Retrieve Order GET …/{user_name}/oms_orders
+	// localhost:8080/api/Petro/oms_orders
 	@Override
 	public List<Oms_order> findByUserName(String user_name) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		List<Oms_order> Orders = currentSession.createQuery("from Oms_order o where o.oms_user.user_name='" + user_name + "'", Oms_order.class).getResultList();
+		List<Oms_order> orders = currentSession.createQuery
+		("from Oms_order o where o.oms_user.user_name='" + 
+		user_name + "'", Oms_order.class).getResultList();
 
-		return Orders;
+		return orders;
 	}
+	
+	@Override
+	public void saveByUserName(Oms_order user_name) {
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		currentSession.saveOrUpdate(user_name);
+		
+		
+	}
+
 
 }

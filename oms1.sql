@@ -24,9 +24,9 @@ CREATE TABLE `product` (
   `category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   UNIQUE KEY `PRODUCT_CODE` (`product_code`),
-  UNIQUE KEY `QUANTITY` (`quantity`),
+  
   KEY `FK_CATEGORY_idx` (`category_id`),
-  CONSTRAINT `FK_CATEGORY` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_CATEGORY` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -49,18 +49,18 @@ CREATE TABLE `oms_order` (
 
 DROP TABLE IF EXISTS `order_product`;
 CREATE TABLE `order_product` (
-  `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `product_code` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
+  
   PRIMARY KEY (`product_id`,`order_id`),
   KEY `FK_ORDER_idx` (`order_id`),
   KEY `FK_PRODUCT_CODE` (`product_code`),
-  KEY `FK_QUANTITY` (`quantity`),
+ 
   CONSTRAINT `FK_ORDER_idx` FOREIGN KEY (`order_id`) REFERENCES `oms_order` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_PRODUCT_CODE` FOREIGN KEY (`product_code`) REFERENCES `product` (`product_code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_PRODUCT_05` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_QUANTITY` FOREIGN KEY (`quantity`) REFERENCES `product` (`quantity`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_PRODUCT_05` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
   
@@ -82,17 +82,17 @@ INSERT INTO `oms_user` (`id`,`user_name`,`full_name`) VALUES (4,'Vio','Violeta I
 INSERT INTO `oms_user` (`id`,`user_name`,`full_name`) VALUES (5,'Petro','Mirica Gabriela');
 INSERT INTO `oms_user` (`id`,`user_name`,`full_name`) VALUES (6,'Niky','Nicoleta Marinescu');
 
-INSERT INTO `order_product` (`product_id`,`order_id`,`product_code`,`quantity`) VALUES (1,1,222,1);
-INSERT INTO `order_product` (`product_id`,`order_id`,`product_code`,`quantity`) VALUES (2,2,333,5);
-INSERT INTO `order_product` (`product_id`,`order_id`,`product_code`,`quantity`) VALUES (3,3,444,2);
+INSERT INTO `order_product` (`product_id`,`order_id`,`product_code`) VALUES (1,1,222);
+INSERT INTO `order_product` (`product_id`,`order_id`,`product_code`) VALUES (2,2,333);
+INSERT INTO `order_product` (`product_id`,`order_id`,`product_code`) VALUES (3,3,444);
 
 INSERT INTO `product` (`product_id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (1,222,'Laptop','Acer',1,3);
-INSERT INTO `product` (`product_id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (2,333,'TV','Samsung',5,2);
-INSERT INTO `product` (`product_id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (3,444,'Audi','A6',2,1);
-INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('4', '555', 'BMW', 'Seria 5', '6', '1');
-INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('5', '666', 'TV', 'LG', '4', '2');
-INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('6', '777', 'Laptop', 'Lenovo', '3', '3');
-INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('7', '888', 'Opel', 'Vectra', '7', '1');
+INSERT INTO `product` (`product_id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (2,333,'TV','Samsung',1,2);
+INSERT INTO `product` (`product_id`,`product_code`,`product_name`,`description`,`quantity`,`category_id`) VALUES (3,444,'Audi','A6',1,1);
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('4', '555', 'BMW', 'Seria 5', '1', '1');
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('5', '666', 'TV', 'LG', '1', '2');
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('6', '777', 'Laptop', 'Lenovo', '1', '3');
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `description`, `quantity`, `category_id`) VALUES ('7', '888', 'Opel', 'Vectra', '1', '1');
 
 
 SET FOREIGN_KEY_CHECKS = 1;

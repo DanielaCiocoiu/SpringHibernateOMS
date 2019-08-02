@@ -8,13 +8,16 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import com.home.springboot.OMS.entity.Oms_order;
 import com.home.springboot.OMS.entity.Product;
 
 @Repository
 public class ProductDAOHibernateImpl implements ProductDAO {
 
-	private EntityManager entityManager;// creat automat de Spring Boot
+	private EntityManager entityManager;
 
 	@Autowired
 	public ProductDAOHibernateImpl(EntityManager theEntityManager) {
@@ -26,13 +29,9 @@ public class ProductDAOHibernateImpl implements ProductDAO {
 
 	public List<Product> findAll() {
 
-		// sesiunea curenta Hibernate
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// creez query
 		Query<Product> theQuery = currentSession.createQuery("from Product", Product.class);
-
-		// execut interogarea si obtin result list
 
 		List<Product> products = theQuery.getResultList();
 
@@ -41,25 +40,48 @@ public class ProductDAOHibernateImpl implements ProductDAO {
 	}
 
 	@Override
-	public Product findByName(String theproduct_name) {
+	public Product findById(int product_id) {
 
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		
-		Product theProduct = currentSession.get(Product.class, theproduct_name);
+		Product theProduct = currentSession.get(Product.class, product_id);
 
 		return theProduct;
 	}
 
 	@Override
-	public Product findById(int theId) {
+	public List<Product> findByName(String product_name) {
 
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// obtin produsele
-		Product theProduct = currentSession.get(Product.class, theId);
+		List<Product> theProductName = currentSession
+				.createQuery("from Product p where p.product_name='" + product_name + "'", Product.class)
+				.getResultList();
 
-		return theProduct;
+		return theProductName;
 	}
 
+	// localhost:8080/api/Petro/oms_orders
+//		@Override
+//		public List<Oms_order> findByUserName(String user_name) {
+//			Session currentSession = entityManager.unwrap(Session.class);
+//
+//			List<Oms_order> orders = currentSession.createQuery
+//			("from Oms_order o where o.oms_user.user_name='" + user_name + "'", Oms_order.class).getResultList();
+//
+//			return orders;
+//		}
+
+	// localhost:8080/api/products?cat=TV
+	@Override
+	public List<Product> findByCat(String cat) {
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		List<Product> theCatProduct = currentSession
+				.createQuery("from Product p where p.product.category.cat = TV and product.category.cat='" + cat + "'", Product.class)
+				.getResultList();
+
+		return theCatProduct;
+
+	}
 }

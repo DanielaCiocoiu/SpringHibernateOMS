@@ -29,19 +29,20 @@ public class Oms_orderServiceImpl implements Oms_orderService {
 	@Transactional
 	public Oms_order findById(int theId) {
 		return oms_orderDAO.findById(theId);
-
-	}
-
-	@Override
-	public void save(Oms_order theOms_order) {
-		oms_orderDAO.save(theOms_order);
-
 	}
 
 	@Override
 	public List<Oms_order> findByUserName(String user_name) {
 		return oms_orderDAO.findByUserName(user_name);
-
 	}
-
+	
+	@Override
+	public void save(Oms_order theOms_order) {
+		oms_orderDAO.save(theOms_order);
+	}
+	
+	public void saveByUserName(Oms_order user_name) {
+		oms_orderDAO.saveByUserName(user_name);
+	}
 }
+

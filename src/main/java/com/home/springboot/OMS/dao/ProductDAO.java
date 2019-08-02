@@ -7,6 +7,7 @@ import com.home.springboot.OMS.entity.Product;
 public interface ProductDAO {
 
 	public List<Product> findAll();
-	public Product findByName(String theproduct_name);
-	public Product findById(int theId);
+	public List<Product> findByName(String product_name);
+	public Product findById(int product_id);
+	public List<Product> findByCat(String cat);
 }

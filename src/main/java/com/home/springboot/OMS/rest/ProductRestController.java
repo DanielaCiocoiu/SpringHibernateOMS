@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.home.springboot.OMS.entity.Oms_order;
 import com.home.springboot.OMS.entity.Product;
 import com.home.springboot.OMS.service.ProductService;
 
@@ -30,8 +31,8 @@ public class ProductRestController {
 		return productService.findAll();
 	}
 
-	@GetMapping("/products/{productId}") //dupa product name
-	public Product getProduct(@PathVariable int productId) {
+	@GetMapping("/products/{productId}")
+	public Product getProductId(@PathVariable int productId) {
 		Product theProduct = productService.findById(productId);
 		if (theProduct == null) {
 			throw new RuntimeException("Product is not found - " + productId);
@@ -39,42 +40,18 @@ public class ProductRestController {
 		return theProduct;
 	}
 
-	
-	//localhost:8080/api/products?cat=TV
-	@GetMapping("/products/cat=TV")//caut 
-	public Product getProduct(
-			
-			@RequestParam(value = "cat", required = true) String cat
-			 {
+	@GetMapping("/{product_name}/products")
+	public List<Product> getProductName(@PathVariable String product_name) {
+		List<Product> theProductName = productService.findByName(product_name);
 
-		
-		Product theProduct = productService.findById(productId);
-		if (theProduct == null) {
-			throw new RuntimeException("Product is not found - " + productId);
-		}
-		return theProduct;
+		return theProductName;
 	}
 
-	
-//	@GetMapping("/products/{product_name}")
-//	public Product getProduct(@PathVariable String product_name) { 
-//
-//		Product theProduct= productService.findByName(product_name);
-//	if(theProduct==null) {
-//		throw new RuntimeException("Product Name is not found - " + product_name);
-//	}
-//	return theProduct;
-//	}
-
-//	@GetMapping("/productNames/{productId}")
-//	@ResponseBody
-//	public String getProductName (
-//			@PathVariable(value="productId") int productId,
-//			@RequestParam(value="product_name", required=true) String product_name, 
-//			@RequestParam (value="category_id", required=true) String category_id
-//			){
-//		
-//		return "product_name: " + product_name + " " + "category_id: " + category_id;
-//	}
+	// localhost:8080/api/products?cat=TV
+	@GetMapping("/products?cat=TV")
+	public List<Product> getProduct(@RequestParam(value = "cat", required = true) String cat) {
+		List<Product> theCatProduct = productService.findByCat(cat); // lista de produse
+		return theCatProduct;
+	}
 
 }

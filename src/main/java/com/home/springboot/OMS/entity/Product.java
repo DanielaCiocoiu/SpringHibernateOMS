@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "product")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="product_id")
 
 public class Product implements Serializable {
 
@@ -50,7 +50,7 @@ public class Product implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@NaturalId
+	//@NaturalId
 	@Column(name = "quantity")
 	private int quantity;
 

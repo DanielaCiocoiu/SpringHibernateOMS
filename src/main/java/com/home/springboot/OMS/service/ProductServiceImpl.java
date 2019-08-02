@@ -29,14 +29,20 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	@Transactional
-	public Product findByName(String theproduct_name) {
-		return productDAO.findByName(theproduct_name);
+	public List<Product> findByName(String product_name) {
+		return productDAO.findByName(product_name);
 		
 	}
 	@Override
 	@Transactional
-		public Product findById(int theId) {
-		return productDAO.findById(theId);
+		public Product findById(int product_id) {
+		return productDAO.findById(product_id);
+	}
+
+
+	@Override
+	public List<Product> findByCat(String cat) {
+		return productDAO.findByCat(cat);
 	}
 
 }

@@ -29,7 +29,7 @@ public class Category {
 	@OneToMany(mappedBy="category", fetch = FetchType.LAZY,
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						 CascadeType.DETACH, CascadeType.REFRESH})
-	private List<Product> products= new ArrayList<Product>();
+	private List<Product> products;
 	
 	
 	
