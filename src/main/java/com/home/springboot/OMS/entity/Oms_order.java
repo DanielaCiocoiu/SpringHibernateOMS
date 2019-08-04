@@ -15,10 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "oms_order")
@@ -43,7 +46,7 @@ public class Oms_order{
 	@JoinTable(name = "order_product", 
 	joinColumns = @JoinColumn(name = "order_id"), 
 	inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private List<Product> products = new ArrayList<Product>(0);
+	private List<Product> products;
 
 	public Oms_order() {
 
@@ -55,6 +58,13 @@ public class Oms_order{
 	}
 
 	
+
+	public Oms_order(Date creation_time, Oms_user oms_user, List<Product> products) {
+		super();
+		this.creation_time = creation_time;
+		this.oms_user = oms_user;
+		this.products = products;
+	}
 
 	public int getOrder_id() {
 		return order_id;

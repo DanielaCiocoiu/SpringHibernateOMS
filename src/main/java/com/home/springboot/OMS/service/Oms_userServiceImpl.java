@@ -3,11 +3,9 @@ package com.home.springboot.OMS.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.home.springboot.OMS.dao.Oms_orderDAO;
 import com.home.springboot.OMS.dao.Oms_userDAO;
 
 import com.home.springboot.OMS.entity.Oms_user;

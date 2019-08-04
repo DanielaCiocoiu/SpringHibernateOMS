@@ -7,9 +7,8 @@ import com.home.springboot.OMS.entity.Oms_order;
 public interface Oms_orderService {
 	public List<Oms_order> findAll();
 	public Oms_order findById(int theId);
-	public void save(Oms_order theOms_order);
 	public List<Oms_order> findByUserName(String user_name);
-	public void saveByUserName(Oms_order user_name);
-	
+	public void save(Oms_order theOms_order);
+	public void save(Oms_order oms_order, String user_name);
 	
 }

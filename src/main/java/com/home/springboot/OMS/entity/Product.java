@@ -20,26 +20,21 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "product")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="product_id")
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "product_id")
 public class Product implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
 	private int product_id;
 
-	
 	@Column(name = "product_code")
 	private int product_code;
 
@@ -50,24 +45,21 @@ public class Product implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	//@NaturalId
+	// @NaturalId
 	@Column(name = "quantity")
 	private int quantity;
 
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id")
 	private Category category;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
-	@JoinTable(name = "order_product", 
-	joinColumns = @JoinColumn(name = "product_id"), 
-	inverseJoinColumns = @JoinColumn(name = "order_id"))
-	private List<Oms_order> oms_orders = new ArrayList<Oms_order>(0);
-
+	@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
+	private List<Oms_order> oms_orders;
 
 	public Product() {
-		
+
 	}
 
 	public Product(int product_code, String product_name, String description, int quantity, Category category) {
@@ -138,10 +130,12 @@ public class Product implements Serializable {
 		this.quantity = quantity;
 	}
 
+	@JsonIgnore
 	public Category getCategory() {
 		return category;
 	}
 
+	@JsonIgnore
 	public void setCategory(Category category) {
 		this.category = category;
 	}
@@ -160,7 +154,5 @@ public class Product implements Serializable {
 		return "Product [product_id=" + product_id + ", product_code=" + product_code + ", product_name=" + product_name
 				+ ", description=" + description + ", quantity=" + quantity + ", category=" + category + "]";
 	}
-
-	
 
 }

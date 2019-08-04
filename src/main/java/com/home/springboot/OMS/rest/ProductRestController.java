@@ -35,7 +35,7 @@ public class ProductRestController {
 	public Product getProductId(@PathVariable int productId) {
 		Product theProduct = productService.findById(productId);
 		if (theProduct == null) {
-			throw new RuntimeException("Product is not found - " + productId);
+			throw new RuntimeException("Product ID is not found - " + productId);
 		}
 		return theProduct;
 	}
@@ -47,10 +47,13 @@ public class ProductRestController {
 		return theProductName;
 	}
 
-	// localhost:8080/api/products?cat=TV
-	@GetMapping("/products?cat=TV")
-	public List<Product> getProduct(@RequestParam(value = "cat", required = true) String cat) {
+	// localhost:8080/api/?cat=TV/product
+	@GetMapping("/?cat=TV/product")
+	public List<Product> getProduct(@RequestParam(value = "TV", required = true) String cat) {
 		List<Product> theCatProduct = productService.findByCat(cat); // lista de produse
+		if (theCatProduct == null) {
+			throw new RuntimeException("Product is not found - " + cat);
+		}
 		return theCatProduct;
 	}
 
