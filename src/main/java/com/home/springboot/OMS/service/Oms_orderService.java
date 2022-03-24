@@ -5,10 +5,10 @@ import java.util.List;
 import com.home.springboot.OMS.entity.Oms_order;
 
 public interface Oms_orderService {
-	public List<Oms_order> findAll();
-	public Oms_order findById(int theId);
-	public List<Oms_order> findByUserName(String user_name);
-	public void save(Oms_order theOms_order);
-	public void save(Oms_order oms_order, String user_name);
+	 List<Oms_order> findAll();
+	 Oms_order findById(int theId);
+	 List<Oms_order> findByUserName(String user_name);
+	 void save(Oms_order theOms_order);
+	 void save(Oms_order oms_order, String user_name);
 	
 }

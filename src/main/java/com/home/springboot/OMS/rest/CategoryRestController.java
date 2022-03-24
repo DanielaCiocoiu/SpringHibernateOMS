@@ -20,14 +20,11 @@ import com.home.springboot.OMS.service.ProductService;
 public class CategoryRestController {
 
 	private CategoryService categoryService;
-	
-	//injectez product dao
+
 	@Autowired
 	public CategoryRestController(CategoryService theCategoryService) {
 		categoryService = theCategoryService;
 	}
-	
-	//expun "/products" si returnez lista de produse
 	
 	@GetMapping("/category")
 	public List<Category> findAll(){
@@ -35,15 +32,17 @@ public class CategoryRestController {
 	}
 	
 	
-//	@GetMapping("/product/{productId}")
-//	public Product getProduct(@PathVariable int productId) { 
-//	//deleg catre user service
-//		Product theProduct= productService.findById(productId);
-//	if(theProduct==null) {
-//		throw new RuntimeException("Product is not found - " + productId);
-//	}
-//	return theProduct;
-//	}
-//	
+/*
+	@GetMapping("/product/{productId}")
+	public Product getProduct(@PathVariable int productId) {
+	//deleg catre user service
+		Product theProduct= productService.findById(productId);
+	if(theProduct==null) {
+		throw new RuntimeException("Product is not found - " + productId);
+	}
+	return theProduct;
+	}
+*/
+
 
 }

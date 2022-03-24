@@ -21,19 +21,14 @@ public class CategoryServiceImpl implements CategoryService {
 	public CategoryServiceImpl(CategoryDAO theCategoryDAO) {
 		categoryDAO = theCategoryDAO;
 	}
-	
-	
-	//@Qualifier("productDAOJpaImpl")
-	
+
 	@Override
 	@Transactional
 	public List<Category> findAll() {
 		return categoryDAO.findAll();
 	}
 
-	
-
-	@Override
+		@Override
 	@Transactional
 	public Category findById(int theId) {
 		return categoryDAO.findById(theId);

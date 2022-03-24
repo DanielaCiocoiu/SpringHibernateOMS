@@ -5,7 +5,7 @@ import java.util.List;
 import com.home.springboot.OMS.entity.Category;
 
 public interface CategoryService {
-	public List<Category> findAll();
-	public Category findById(int theId);
+	List<Category> findAll();
+	Category findById(int theId);
 	
 }
